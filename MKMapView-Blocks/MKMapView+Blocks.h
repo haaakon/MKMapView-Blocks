@@ -24,23 +24,23 @@
 
 @property (copy, nonatomic) void (^mapvViewDidAddAnnotationViewsBlock)(MKMapView *mapView, NSArray *views);
 
-@property (copy, nonatomic) void (^mapViewAnnotationViewCalloutAccessoryControlTappedBlock)(MKMapView *mapView, UIControl *control);
+@property (copy, nonatomic) void (^mapViewAnnotationViewCalloutAccessoryControlTappedBlock)(MKMapView *mapView, MKAnnotationView *view , UIControl *control);
 
-@property (copy, nonatomic) void (^mapViewDidSelectAnnotationView)(MKMapView *mapView, MKAnnotationView *view);
-@property (copy, nonatomic) void (^mapViewDidDeselectAnnotationView)(MKMapView *mapView, MKAnnotationView *view);
+@property (copy, nonatomic) void (^mapViewDidSelectAnnotationViewBlock)(MKMapView *mapView, MKAnnotationView *view);
+@property (copy, nonatomic) void (^mapViewDidDeselectAnnotationViewBlock)(MKMapView *mapView, MKAnnotationView *view);
 
-@property (copy, nonatomic) void (^mapViewWillStartLocatingUser)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidStopLocatingUser)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidUpdateUserLocation)(MKMapView *mapView, MKUserLocation *userLocation);
-@property (copy, nonatomic) void (^mapViewDidFailToLocateUserWithError)(MKMapView *mapView, NSError *error);
+@property (copy, nonatomic) void (^mapViewWillStartLocatingUserBlock)(MKMapView *mapView);
+@property (copy, nonatomic) void (^mapViewDidStopLocatingUserBlock)(MKMapView *mapView);
+@property (copy, nonatomic) void (^mapViewDidUpdateUserLocationBlock)(MKMapView *mapView, MKUserLocation *userLocation);
+@property (copy, nonatomic) void (^mapViewDidFailToLocateUserWithErrorBlock)(MKMapView *mapView, NSError *error);
 
-@property (copy, nonatomic) void (^mapViewAnnotationViewDidChangeDragState)(MKMapView *mapView, MKAnnotationViewDragState newState);
+@property (copy, nonatomic) void (^mapViewAnnotationViewDidChangeDragStateBlock)(MKMapView *mapView,MKAnnotationView *view, MKAnnotationViewDragState newState, MKAnnotationViewDragState oldState);
 
 
-@property (copy, nonatomic) void (^mapViewDidChangeUserTrackingMode)(MKMapView *mapView, MKAnnotationViewDragState newState);
+@property (copy, nonatomic) void (^mapViewDidChangeUserTrackingModeBlock)(MKMapView *mapView, MKUserTrackingMode mode, BOOL animated);
 
 @property (copy, nonatomic) MKOverlayRenderer* (^mapViewRendererForOverlayBlock)(MKMapView *mapView,id<MKOverlay> overlay);
-@property (copy, nonatomic) void (^mapViewDidAddOverlayRenderers)(MKMapView *mapView, NSArray *renderers);
+@property (copy, nonatomic) void (^mapViewDidAddOverlayRenderersBlock)(MKMapView *mapView, NSArray *renderers);
 
 
 
