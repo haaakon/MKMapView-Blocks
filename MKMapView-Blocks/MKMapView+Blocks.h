@@ -22,7 +22,7 @@
 
 @property (copy, nonatomic) MKAnnotationView* (^mapViewViewForAnnotationBlock)(MKMapView *mapView, id<MKAnnotation> annotation);
 
-@property (copy, nonatomic) void (^mapvViewDidAddAnnotationViewsBlock)(MKMapView *mapView, NSArray *views);
+@property (copy, nonatomic) void (^mapViewDidAddAnnotationViewsBlock)(MKMapView *mapView, NSArray *views);
 
 @property (copy, nonatomic) void (^mapViewAnnotationViewCalloutAccessoryControlTappedBlock)(MKMapView *mapView, MKAnnotationView *view , UIControl *control);
 

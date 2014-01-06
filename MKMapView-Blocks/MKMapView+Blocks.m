@@ -34,7 +34,7 @@ static const void *MKMapViewWillStartLoadingMapKey                           = &
 static const void *MKMapViewDidFinishLoadingMapKey                           = &MKMapViewDidFinishLoadingMapKey;
 static const void *MKMapViewDidFailLoadingMapKey                           = &MKMapViewDidFailLoadingMapKey;
 static const void *MKMapViewWillStartRenderingMapKey                           = &MKMapViewWillStartRenderingMapKey;
-static const void *MKMapViewDidFinishRenderingMapBlock                           = &MKMapViewDidFinishRenderingMapBlock;
+static const void *MKMapViewDidFinishRenderingMapKey                           = &MKMapViewDidFinishRenderingMapKey;
 static const void *MKMapViewViewForAnnotationKey                           = &MKMapViewViewForAnnotationKey;
 static const void *MKMapViewDidAddAnnotationViewsKey                           = &MKMapViewDidAddAnnotationViewsKey;
 static const void *MKMapViewAnnotationViewCalloutAccessoryControlTappedKey                           = &MKMapViewAnnotationViewCalloutAccessoryControlTappedKey;
@@ -179,7 +179,7 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
 // Use the current positions of the annotation views as the destinations of the animation.
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
-    MKMapViewVoidArrayBlock block = mapView.mapvViewDidAddAnnotationViewsBlock;
+    MKMapViewVoidArrayBlock block = mapView.mapViewDidAddAnnotationViewsBlock;
     
     if (block) {
          block(mapView,views);
@@ -364,58 +364,248 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
         [delegate mapView:mapView didAddOverlayRenderers:renderers];
     }
 }
+
 #pragma mark block based getters/setters
 - (void (^)(MKMapView *, BOOL))mapViewRegionWillChangeAnimatedBlock
 {
-    return objc_getAssociatedObject(self, UITextFieldShouldClearKey);
+    return objc_getAssociatedObject(self, MKMapViewRegionWillChangeAnimatedKey);
 }
+
 - (void)setMapViewRegionWillChangeAnimatedBlock:(void (^)(MKMapView *, BOOL))mapViewRegionWillChangeAnimatedBlock
 {
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewRegionWillChangeAnimatedKey, mapViewRegionWillChangeAnimatedBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *, BOOL))mapViewRegionDidChangeAnimatedBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewRegionDidChangeAnimatedKey);
+}
+
+- (void)setMapViewRegionDidChangeAnimatedBlock:(void (^)(MKMapView *, BOOL))mapViewRegionDidChangeAnimatedBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewRegionDidChangeAnimatedKey, mapViewRegionDidChangeAnimatedBlock, OBJC_ASSOCIATION_COPY);
+}
+- (void (^)(MKMapView *))mapViewWillStartLoadingMapBlock
+{
+
+    return objc_getAssociatedObject(self, MKMapViewWillStartLoadingMapKey);
+}
+
+- (void)setMapViewWillStartLoadingMapBlock:(void (^)(MKMapView *))mapViewWillStartLoadingMapBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewRegionDidChangeAnimatedKey,mapViewWillStartLoadingMapBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *))mapViewDidFinishLoadingMapBlock
+{
+    
+    return objc_getAssociatedObject(self, MKMapViewDidFinishLoadingMapKey);
+}
+
+- (void)setMapViewDidFinishLoadingMapBlock:(void (^)(MKMapView *))mapViewDidFinishLoadingMapBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidFinishLoadingMapKey, mapViewDidFinishLoadingMapBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *, NSError *))mapViewDidFailLoadingMapBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidFailLoadingMapKey);
     
 }
 
-/*
- 
- return objc_getAssociatedObject(self, UITextFieldShouldClearKey);
- }
- 
- - (void)setShouldClearBlock:(BOOL (^)(UITextField *textField))shouldClearBlock
- {
- [self setDelegateIfNoDelegateSet];
- objc_setAssociatedObject(self, UITextFieldShouldClearKey, shouldClearBlock, OBJC_ASSOCIATION_COPY);
- }
-*/
-/*
-@property (copy, nonatomic) void (^mapViewRegionWillChangeAnimatedBlock)(MKMapView *mapView, BOOL animated);
-@property (copy, nonatomic) void (^mapViewRegionDidChangeAnimatedBlock)(MKMapView *maoView, BOOL animated);
+- (void)setMapViewDidFailLoadingMapBlock:(void (^)(MKMapView *, NSError *))mapViewDidFailLoadingMapBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidFailLoadingMapKey, mapViewDidFailLoadingMapBlock, OBJC_ASSOCIATION_COPY);
+}
 
-@property (copy, nonatomic) void (^mapViewWillStartLoadingMapBlock)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidFinishLoadingMapBlock)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidFailLoadingMapBlock)(MKMapView *mapView, NSError *error);
+- (void (^)(MKMapView *))mapViewWillStartRenderingMapBlock
+{
+    
+    return objc_getAssociatedObject(self, MKMapViewWillStartRenderingMapKey);
+}
 
-@property (copy, nonatomic) void (^mapViewWillStartRenderingMapBlock)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidFinishRenderingMapBlock)(MKMapView *mapView, BOOL fullyRendered);
+- (void)setMapViewWillStartRenderingMapBlock:(void (^)(MKMapView *))mapViewWillStartRenderingMapBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewWillStartRenderingMapKey,mapViewWillStartRenderingMapBlock, OBJC_ASSOCIATION_COPY);
+}
 
-@property (copy, nonatomic) MKAnnotationView* (^mapViewViewForAnnotationBlock)(MKMapView *mapView, id<MKAnnotation> annotation);
+- (void (^)(MKMapView *, BOOL))mapViewDidFinishRenderingMapBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidFinishLoadingMapKey);
+    
+}
 
-@property (copy, nonatomic) void (^mapvViewDidAddAnnotationViewsBlock)(MKMapView *mapView, NSArray *views);
+- (void)setMapViewDidFinishRenderingMapBlock:(void (^)(MKMapView *, BOOL))mapViewDidFinishRenderingMapBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidFinishRenderingMapKey, mapViewDidFinishRenderingMapBlock, OBJC_ASSOCIATION_COPY);
+}
 
-@property (copy, nonatomic) void (^mapViewAnnotationViewCalloutAccessoryControlTappedBlock)(MKMapView *mapView, MKAnnotationView *view , UIControl *control);
+- (MKAnnotationView *(^)(MKMapView *, id<MKAnnotation>))mapViewViewForAnnotationBlock
+{
+    
+    return objc_getAssociatedObject(self, MKMapViewViewForAnnotationKey);
+}
 
-@property (copy, nonatomic) void (^mapViewDidSelectAnnotationViewBlock)(MKMapView *mapView, MKAnnotationView *view);
-@property (copy, nonatomic) void (^mapViewDidDeselectAnnotationViewBlock)(MKMapView *mapView, MKAnnotationView *view);
+- (void)setMapViewViewForAnnotationBlock:(MKAnnotationView *(^)(MKMapView *, id<MKAnnotation>))mapViewViewForAnnotationBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewViewForAnnotationKey, mapViewViewForAnnotationBlock, OBJC_ASSOCIATION_COPY);
+}
 
-@property (copy, nonatomic) void (^mapViewWillStartLocatingUserBlock)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidStopLocatingUserBlock)(MKMapView *mapView);
-@property (copy, nonatomic) void (^mapViewDidUpdateUserLocationBlock)(MKMapView *mapView, MKUserLocation *userLocation);
-@property (copy, nonatomic) void (^mapViewDidFailToLocateUserWithErrorBlock)(MKMapView *mapView, NSError *error);
+- (void (^)(MKMapView *, NSArray *))mapViewDidAddAnnotationViewsBlock
+{
+    
+    return objc_getAssociatedObject(self, MKMapViewDidAddAnnotationViewsKey);
+}
 
-@property (copy, nonatomic) void (^mapViewAnnotationViewDidChangeDragStateBlock)(MKMapView *mapView,MKAnnotationView *view, MKAnnotationViewDragState newState, MKAnnotationViewDragState oldState);
+- (void)setMapViewDidAddAnnotationViewsBlock:(void (^)(MKMapView *, NSArray *))mapViewDidAddAnnotationViewsBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidAddAnnotationViewsKey, mapViewDidAddAnnotationViewsBlock, OBJC_ASSOCIATION_COPY);
+}
 
+- (void (^)(MKMapView *, MKAnnotationView *, UIControl *))mapViewAnnotationViewCalloutAccessoryControlTappedBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewAnnotationViewCalloutAccessoryControlTappedKey);
+    
+}
 
-@property (copy, nonatomic) void (^mapViewDidChangeUserTrackingModeBlock)(MKMapView *mapView, MKUserTrackingMode mode, BOOL animated);
+- (void)setMapViewAnnotationViewCalloutAccessoryControlTappedBlock:(void (^)(MKMapView *, MKAnnotationView *, UIControl *))mapViewAnnotationViewCalloutAccessoryControlTappedBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewAnnotationViewCalloutAccessoryControlTappedKey, mapViewAnnotationViewCalloutAccessoryControlTappedBlock, OBJC_ASSOCIATION_COPY);
+}
 
-@property (copy, nonatomic) MKOverlayRenderer* (^mapViewRendererForOverlayBlock)(MKMapView *mapView,id<MKOverlay> overlay);
-@property (copy, nonatomic) void (^mapViewDidAddOverlayRenderersBlock)(MKMapView *mapView, NSArray *renderers);
-*/
+- (void (^)(MKMapView *, MKAnnotationView *))mapViewDidSelectAnnotationViewBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidSelectAnnotationViewKey);
+    
+}
+
+- (void)setMapViewDidSelectAnnotationViewBlock:(void (^)(MKMapView *, MKAnnotationView *))mapViewDidSelectAnnotationViewBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidSelectAnnotationViewKey, mapViewDidSelectAnnotationViewBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *, MKAnnotationView *))mapViewDidDeselectAnnotationViewBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidDeselectAnnotationViewKey);
+    
+}
+
+- (void)setMapViewDidDeselectAnnotationViewBlock:(void (^)(MKMapView *, MKAnnotationView *))mapViewDidDeselectAnnotationViewBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidDeselectAnnotationViewKey, mapViewDidDeselectAnnotationViewBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *))mapViewWillStartLocatingUserBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewWillStartLocatingUserKey);
+    
+}
+
+- (void)setMapViewWillStartLocatingUserBlock:(void (^)(MKMapView *))mapViewWillStartLocatingUserBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewWillStartLocatingUserKey, mapViewWillStartLocatingUserBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *))mapViewDidStopLocatingUserBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidStopLocatingUserKey);
+    
+}
+
+- (void)setMapViewDidStopLocatingUserBlock:(void (^)(MKMapView *))mapViewDidStopLocatingUserBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidStopLocatingUserKey, mapViewDidStopLocatingUserBlock, OBJC_ASSOCIATION_COPY);
+}
+- (void (^)(MKMapView *, MKUserLocation *))mapViewDidUpdateUserLocationBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidUpdateUserLocationKey);
+    
+}
+
+- (void)setMapViewDidUpdateUserLocationBlock:(void (^)(MKMapView *, MKUserLocation *))mapViewDidUpdateUserLocationBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewRegionDidChangeAnimatedKey, mapViewDidUpdateUserLocationBlock, OBJC_ASSOCIATION_COPY);
+}
+- (void (^)(MKMapView *, NSError *))mapViewDidFailToLocateUserWithErrorBlock
+{
+    
+    return objc_getAssociatedObject(self, MKMapViewDidFailToLocateUserWithErrorKey);
+    
+}
+
+- (void)setMapViewDidFailToLocateUserWithErrorBlock:(void (^)(MKMapView *, NSError *))mapViewDidFailToLocateUserWithErrorBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidFailToLocateUserWithErrorKey, mapViewDidFailToLocateUserWithErrorBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void)setDelegateIfNoDelegateSet
+{
+    if (self.delegate != (id<MKMapViewDelegate>)self) {
+        objc_setAssociatedObject(self, MKMapViewDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = (id<MKMapViewDelegate>)self;
+    }
+}
+
+- (void (^)(MKMapView *, MKAnnotationView *, MKAnnotationViewDragState, MKAnnotationViewDragState))mapViewAnnotationViewDidChangeDragStateBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewAnnotationViewDidChangeDragStateKey);
+    
+}
+
+- (void)setMapViewAnnotationViewDidChangeDragStateBlock:(void (^)(MKMapView *, MKAnnotationView *, MKAnnotationViewDragState, MKAnnotationViewDragState))mapViewAnnotationViewDidChangeDragStateBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewAnnotationViewDidChangeDragStateKey, mapViewAnnotationViewDidChangeDragStateBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (void (^)(MKMapView *, MKUserTrackingMode, BOOL))mapViewDidChangeUserTrackingModeBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidChangeUserTrackingModeKey);
+    
+}
+
+- (void)setMapViewDidChangeUserTrackingModeBlock:(void (^)(MKMapView *, MKUserTrackingMode, BOOL))mapViewDidChangeUserTrackingModeBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidChangeUserTrackingModeKey, mapViewDidChangeUserTrackingModeBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (MKOverlayRenderer *(^)(MKMapView *, id<MKOverlay>))mapViewRendererForOverlayBlock
+{
+    
+    return objc_getAssociatedObject(self, MKMapViewRendererForOverlayKey);
+}
+
+-(void)setMapViewRendererForOverlayBlock:(MKOverlayRenderer *(^)(MKMapView *, id<MKOverlay>))mapViewRendererForOverlayBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewRendererForOverlayKey, mapViewRendererForOverlayBlock, OBJC_ASSOCIATION_COPY);
+}
+- (void (^)(MKMapView *, NSArray *))mapViewDidAddOverlayRenderersBlock
+{
+    return objc_getAssociatedObject(self, MKMapViewDidAddOverlayRenderersKey);
+    
+}
+-(void)setMapViewDidAddOverlayRenderersBlock:(void (^)(MKMapView *, NSArray *))mapViewDidAddOverlayRenderersBlock
+{
+    [self setDelegateIfNoDelegateSet];
+    objc_setAssociatedObject(self, MKMapViewDidAddOverlayRenderersKey, mapViewDidAddOverlayRenderersBlock, OBJC_ASSOCIATION_COPY);
+}
+
 @end
