@@ -14,15 +14,12 @@ typedef void (^MKMapViewVoidAnimatedBlock) (MKMapView *mapView, BOOL animated);
 typedef void (^MKMapViewVoidFullyRenderedBlock) (MKMapView *mapView, BOOL fullyRendered);
 typedef void (^MKMapViewVoidErrorBlock) (MKMapView *mapView, NSError *error);
 typedef void (^MKMapViewVoidArrayBlock) (MKMapView *mapView, NSArray *array);
-
 typedef MKAnnotationView* (^MKMapViewAnnotationViewAnnotationBlock) (MKMapView *mapView, id<MKAnnotation> annotation);
-
 typedef void (^MKMapViewVoidAnnotationViewUIControlBlock)(MKMapView *mapView, MKAnnotationView *view, UIControl *control);
 typedef void (^MKMapViewVoidAnnotationViewBlock)(MKMapView *mapView, MKAnnotationView *view);
 typedef void (^MKMapViewVoidUserLocationBock)(MKMapView *mapView, MKUserLocation *userLocation);
 typedef void (^MKMapViewVoidAnnotationViewNewDragStateOldDragStateBlock)(MKMapView *mapView, MKAnnotationView *view, MKAnnotationViewDragState newState, MKAnnotationViewDragState oldState);
 typedef void (^MKMapViewVoidUserTrackingModeAnimatedBlock)(MKMapView *mapView, MKUserTrackingMode mode, BOOL animated);
-
 typedef MKOverlayRenderer* (^MKMapViewOverLayRendererOverlayBlock)(MKMapView *mapView, id<MKOverlay> overlay);
 
 @implementation MKMapView (Blocks)
@@ -597,11 +594,13 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
     [self setDelegateIfNoDelegateSet];
     objc_setAssociatedObject(self, MKMapViewRendererForOverlayKey, mapViewRendererForOverlayBlock, OBJC_ASSOCIATION_COPY);
 }
+
 - (void (^)(MKMapView *, NSArray *))mapViewDidAddOverlayRenderersBlock
 {
     return objc_getAssociatedObject(self, MKMapViewDidAddOverlayRenderersKey);
     
 }
+
 -(void)setMapViewDidAddOverlayRenderersBlock:(void (^)(MKMapView *, NSArray *))mapViewDidAddOverlayRenderersBlock
 {
     [self setDelegateIfNoDelegateSet];
