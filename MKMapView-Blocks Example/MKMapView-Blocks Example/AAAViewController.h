@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAAViewController : UIViewController
+#import "MKMapView+Blocks.h"
+#import "AAAAppDelegate.h"
+
+@interface AAAViewController : UIViewController<MKMapViewDelegate>
 
 @end

@@ -9,6 +9,7 @@
 #import "AAAViewController.h"
 
 @interface AAAViewController ()
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
@@ -17,9 +18,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    MKMapView
+    self.mapView.delegate = self;
+    [self.mapView setMapViewDidFinishLoadingMapBlock:^(MKMapView *mapView) {
+        NSLog(@"did finish loading map");
+    }];
+    [self.mapView setMapViewWillStartLoadingMapBlock:^(MKMapView *mapView) {
+        NSLog(@"will start loading map");
+        
+    }];
+    
+    [self.mapView setMapViewDidFailLoadingMapBlock:^(MKMapView *mapView, NSError *error) {
+        NSLog(@"failed with error %@",error);
+    }];
 	// Do any additional setup after loading the view, typically from a nib.
 }
+
 
 - (void)didReceiveMemoryWarning
 {
