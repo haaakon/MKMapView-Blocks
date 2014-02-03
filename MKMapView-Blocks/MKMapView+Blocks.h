@@ -7,7 +7,6 @@
 //
 #import <MapKit/MapKit.h>
 
-
 @interface MKMapView (Blocks)
 
 @property (copy, nonatomic) void (^mapViewRegionWillChangeAnimatedBlock)(MKMapView *mapView, BOOL animated);

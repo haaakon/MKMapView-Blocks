@@ -24,27 +24,27 @@ typedef MKOverlayRenderer* (^MKMapViewOverLayRendererOverlayBlock)(MKMapView *ma
 
 @implementation MKMapView (Blocks)
 
-static const void *MKMapViewDelegateKey                           = &MKMapViewDelegateKey;
+static const void *MKMapViewDelegateKey                                          = &MKMapViewDelegateKey;
 static const void *MKMapViewRegionWillChangeAnimatedKey                          = &MKMapViewRegionWillChangeAnimatedKey;
-static const void *MKMapViewRegionDidChangeAnimatedKey                         = &MKMapViewRegionDidChangeAnimatedKey;
-static const void *MKMapViewWillStartLoadingMapKey                           = &MKMapViewWillStartLoadingMapKey;
-static const void *MKMapViewDidFinishLoadingMapKey                           = &MKMapViewDidFinishLoadingMapKey;
-static const void *MKMapViewDidFailLoadingMapKey                           = &MKMapViewDidFailLoadingMapKey;
-static const void *MKMapViewWillStartRenderingMapKey                           = &MKMapViewWillStartRenderingMapKey;
-static const void *MKMapViewDidFinishRenderingMapKey                           = &MKMapViewDidFinishRenderingMapKey;
-static const void *MKMapViewViewForAnnotationKey                           = &MKMapViewViewForAnnotationKey;
-static const void *MKMapViewDidAddAnnotationViewsKey                           = &MKMapViewDidAddAnnotationViewsKey;
-static const void *MKMapViewAnnotationViewCalloutAccessoryControlTappedKey                           = &MKMapViewAnnotationViewCalloutAccessoryControlTappedKey;
+static const void *MKMapViewRegionDidChangeAnimatedKey                           = &MKMapViewRegionDidChangeAnimatedKey;
+static const void *MKMapViewWillStartLoadingMapKey                               = &MKMapViewWillStartLoadingMapKey;
+static const void *MKMapViewDidFinishLoadingMapKey                               = &MKMapViewDidFinishLoadingMapKey;
+static const void *MKMapViewDidFailLoadingMapKey                                 = &MKMapViewDidFailLoadingMapKey;
+static const void *MKMapViewWillStartRenderingMapKey                             = &MKMapViewWillStartRenderingMapKey;
+static const void *MKMapViewDidFinishRenderingMapKey                             = &MKMapViewDidFinishRenderingMapKey;
+static const void *MKMapViewViewForAnnotationKey                                 = &MKMapViewViewForAnnotationKey;
+static const void *MKMapViewDidAddAnnotationViewsKey                             = &MKMapViewDidAddAnnotationViewsKey;
+static const void *MKMapViewAnnotationViewCalloutAccessoryControlTappedKey       = &MKMapViewAnnotationViewCalloutAccessoryControlTappedKey;
 static const void *MKMapViewDidSelectAnnotationViewKey                           = &MKMapViewDidSelectAnnotationViewKey;
-static const void *MKMapViewDidDeselectAnnotationViewKey                           = &MKMapViewDidDeselectAnnotationViewKey;
-static const void *MKMapViewWillStartLocatingUserKey                           = &MKMapViewWillStartLocatingUserKey;
-static const void *MKMapViewDidStopLocatingUserKey                           = &MKMapViewDidStopLocatingUserKey;
-static const void *MKMapViewDidUpdateUserLocationKey                           = &MKMapViewDidUpdateUserLocationKey;
-static const void *MKMapViewDidFailToLocateUserWithErrorKey                           = &MKMapViewDidFailToLocateUserWithErrorKey;
-static const void *MKMapViewAnnotationViewDidChangeDragStateKey                           = &MKMapViewAnnotationViewDidChangeDragStateKey;
-static const void *MKMapViewDidChangeUserTrackingModeKey                           = &MKMapViewDidChangeUserTrackingModeKey;
-static const void *MKMapViewRendererForOverlayKey                           = &MKMapViewRendererForOverlayKey;
-static const void *MKMapViewDidAddOverlayRenderersKey                           = &MKMapViewDidAddOverlayRenderersKey;
+static const void *MKMapViewDidDeselectAnnotationViewKey                         = &MKMapViewDidDeselectAnnotationViewKey;
+static const void *MKMapViewWillStartLocatingUserKey                             = &MKMapViewWillStartLocatingUserKey;
+static const void *MKMapViewDidStopLocatingUserKey                               = &MKMapViewDidStopLocatingUserKey;
+static const void *MKMapViewDidUpdateUserLocationKey                             = &MKMapViewDidUpdateUserLocationKey;
+static const void *MKMapViewDidFailToLocateUserWithErrorKey                      = &MKMapViewDidFailToLocateUserWithErrorKey;
+static const void *MKMapViewAnnotationViewDidChangeDragStateKey                  = &MKMapViewAnnotationViewDidChangeDragStateKey;
+static const void *MKMapViewDidChangeUserTrackingModeKey                         = &MKMapViewDidChangeUserTrackingModeKey;
+static const void *MKMapViewRendererForOverlayKey                                = &MKMapViewRendererForOverlayKey;
+static const void *MKMapViewDidAddOverlayRenderersKey                            = &MKMapViewDidAddOverlayRenderersKey;
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
@@ -483,7 +483,6 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
 - (void (^)(MKMapView *, MKAnnotationView *))mapViewDidSelectAnnotationViewBlock
 {
     return objc_getAssociatedObject(self, MKMapViewDidSelectAnnotationViewKey);
-    
 }
 
 - (void)setMapViewDidSelectAnnotationViewBlock:(void (^)(MKMapView *, MKAnnotationView *))mapViewDidSelectAnnotationViewBlock
@@ -585,7 +584,6 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
 
 - (MKOverlayRenderer *(^)(MKMapView *, id<MKOverlay>))mapViewRendererForOverlayBlock
 {
-    
     return objc_getAssociatedObject(self, MKMapViewRendererForOverlayKey);
 }
 
