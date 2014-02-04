@@ -393,7 +393,7 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
 - (void)setMapViewWillStartLoadingMapBlock:(void (^)(MKMapView *))mapViewWillStartLoadingMapBlock
 {
     [self setDelegateIfNoDelegateSet];
-    objc_setAssociatedObject(self, MKMapViewRegionDidChangeAnimatedKey,mapViewWillStartLoadingMapBlock, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, MKMapViewWillStartLoadingMapKey,mapViewWillStartLoadingMapBlock, OBJC_ASSOCIATION_COPY);
 }
 
 - (void (^)(MKMapView *))mapViewDidFinishLoadingMapBlock
@@ -408,10 +408,10 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
     objc_setAssociatedObject(self, MKMapViewDidFinishLoadingMapKey, mapViewDidFinishLoadingMapBlock, OBJC_ASSOCIATION_COPY);
 }
 
+
 - (void (^)(MKMapView *, NSError *))mapViewDidFailLoadingMapBlock
 {
     return objc_getAssociatedObject(self, MKMapViewDidFailLoadingMapKey);
-    
 }
 
 - (void)setMapViewDidFailLoadingMapBlock:(void (^)(MKMapView *, NSError *))mapViewDidFailLoadingMapBlock
@@ -494,7 +494,6 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
 - (void (^)(MKMapView *, MKAnnotationView *))mapViewDidDeselectAnnotationViewBlock
 {
     return objc_getAssociatedObject(self, MKMapViewDidDeselectAnnotationViewKey);
-    
 }
 
 - (void)setMapViewDidDeselectAnnotationViewBlock:(void (^)(MKMapView *, MKAnnotationView *))mapViewDidDeselectAnnotationViewBlock
@@ -535,7 +534,7 @@ static const void *MKMapViewDidAddOverlayRenderersKey                           
 - (void)setMapViewDidUpdateUserLocationBlock:(void (^)(MKMapView *, MKUserLocation *))mapViewDidUpdateUserLocationBlock
 {
     [self setDelegateIfNoDelegateSet];
-    objc_setAssociatedObject(self, MKMapViewRegionDidChangeAnimatedKey, mapViewDidUpdateUserLocationBlock, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, MKMapViewDidUpdateUserLocationKey, mapViewDidUpdateUserLocationBlock, OBJC_ASSOCIATION_COPY);
 }
 - (void (^)(MKMapView *, NSError *))mapViewDidFailToLocateUserWithErrorBlock
 {
