@@ -28,4 +28,17 @@ Adds blocks to all MKMapView delegate methods with a simple and easy to use cate
     NSLog(@"did finish loading map");
 }];
 ```
-
+#### mapViewViewForAnnotationBlock:
+```Objective-c
+[self.mapView setMapViewViewForAnnotationBlock:^MKAnnotationView *(MKMapView *mapView, id<MKAnnotation> annotation) {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"mapAnnotation"];
+    if (annotationView == nil) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapAnnotation"];
+    }
+    annotationView.pinColor = MKPinAnnotationColorGreen;
+    return annotationView;
+}];
+```
