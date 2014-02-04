@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC62522218A1510B002BF291 /* AAAMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EC62522118A1510B002BF291 /* AAAMapAnnotation.m */; };
 		ECC30DE91817EE64009C8C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC30DE81817EE64009C8C2D /* Foundation.framework */; };
 		ECC30DEB1817EE64009C8C2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC30DEA1817EE64009C8C2D /* CoreGraphics.framework */; };
 		ECC30DED1817EE64009C8C2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC30DEC1817EE64009C8C2D /* UIKit.framework */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC62522018A1510B002BF291 /* AAAMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMapAnnotation.h; sourceTree = "<group>"; };
+		EC62522118A1510B002BF291 /* AAAMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMapAnnotation.m; sourceTree = "<group>"; };
 		ECC30DE51817EE64009C8C2D /* MKMapView-Blocks Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MKMapView-Blocks Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC30DE81817EE64009C8C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ECC30DEA1817EE64009C8C2D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -121,6 +124,8 @@
 		ECC30DEE1817EE64009C8C2D /* MKMapView-Blocks Example */ = {
 			isa = PBXGroup;
 			children = (
+				EC62522018A1510B002BF291 /* AAAMapAnnotation.h */,
+				EC62522118A1510B002BF291 /* AAAMapAnnotation.m */,
 				ECC30DF71817EE64009C8C2D /* AAAAppDelegate.h */,
 				ECC30DF81817EE64009C8C2D /* AAAAppDelegate.m */,
 				ECC30DFA1817EE65009C8C2D /* Main.storyboard */,
@@ -268,6 +273,7 @@
 			files = (
 				ECC30DF91817EE64009C8C2D /* AAAAppDelegate.m in Sources */,
 				ECC30DFF1817EE65009C8C2D /* AAAViewController.m in Sources */,
+				EC62522218A1510B002BF291 /* AAAMapAnnotation.m in Sources */,
 				ECC30DF51817EE64009C8C2D /* main.m in Sources */,
 				ECC30E1F1817EE8C009C8C2D /* MKMapView+Blocks.m in Sources */,
 			);
@@ -396,10 +402,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MKMapView-Blocks Example/MKMapView-Blocks Example-Prefix.pch";
 				INFOPLIST_FILE = "MKMapView-Blocks Example/MKMapView-Blocks Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -413,6 +422,7 @@
 				GCC_PREFIX_HEADER = "MKMapView-Blocks Example/MKMapView-Blocks Example-Prefix.pch";
 				INFOPLIST_FILE = "MKMapView-Blocks Example/MKMapView-Blocks Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -478,6 +488,7 @@
 				ECC30E191817EE65009C8C2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ECC30E1A1817EE65009C8C2D /* Build configuration list for PBXNativeTarget "MKMapView-Blocks ExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +497,7 @@
 				ECC30E1C1817EE65009C8C2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
