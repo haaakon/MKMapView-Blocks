@@ -15,7 +15,7 @@ Adds blocks to all MKMapView delegate methods with a simple and easy to use cate
 }];
 ```
 
-#### mapViewDidFailLoadingMap: 
+#### mapView:DidFailLoadingMap: 
 ```objective-c
 [self.mapView setMapViewDidFailLoadingMapBlock:^(MKMapView *mapView, NSError *error) {
     NSLog(@"failed with error %@",error);
@@ -28,7 +28,7 @@ Adds blocks to all MKMapView delegate methods with a simple and easy to use cate
     NSLog(@"did finish loading map");
 }];
 ```
-#### mapViewViewForAnnotationBlock:
+#### mapView:ViewForAnnotationBlock:
 ```Objective-c
 [self.mapView setMapViewViewForAnnotationBlock:^MKAnnotationView *(MKMapView *mapView, id<MKAnnotation> annotation) {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
@@ -47,7 +47,7 @@ Adds blocks to all MKMapView delegate methods with a simple and easy to use cate
 Not yet done testing on a mac app.
 Pull-requests for bug-fixes and features are more than welcome!
 
-## Licene:
+## License:
 MIT License
 
 Copyright (c) 2014 Håkon Bogen
